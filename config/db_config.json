@@ -1,0 +1,10 @@
+{
+  "db_name": "test_db",
+  "db_host": "localhost",
+  "db_opts": {},
+  "models": [{
+    "model": "TestModel",
+    "schema": "test_schema"
+  }],
+  "fixture_path": "data/fixtures"
+}

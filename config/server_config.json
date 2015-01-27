@@ -1,0 +1,5 @@
+{
+  "client_dir": "client",
+  "view_dir": "client/views",
+  "view_engine": "jade"
+}

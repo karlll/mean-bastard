@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+//
+// Load fixtures. NB: will drop the collection before loading it from json-file.
+//
+
+var debug = require('debug')('load_fixture')
+var db_cfg = require('../config/db_config.json');
+var path = require('path');
+var fs = require('fs');
+var spawn = require('child_process').spawn;
+
+
+
+if (process.env.mb_env && process.env.mb_env.toLowerCase() === 'test') {
+  var fixture_path = path.join(__dirname, '..', db_cfg.fixture_path);
+  console.log("Loading fixtures from " + fixture_path);
+  fs.readdir(fixture_path, function(err, files) {
+    if (err === null) {
+      files.forEach(function(f) {
+        if (path.extname(f).toLowerCase() === '.json') {
+          var collection = path.basename(f).slice(0, -5);
+          debug("Importing " + f + " to collection " + collection);
+          importFixture(db_cfg.db_host, db_cfg.db_name, collection,
+            path.join(fixture_path, f),
+            function(err) {
+              if (err) {
+                console.error("Error while importing fixture (" + f +
+                  ")");
+                process.exit(1);
+              }
+            });
+        }
+      })
+    } else {
+      console.error("Error when reading fixtures: " + err);
+      process.exit(1);
+    }
+  })
+
+
+}
+
+
+var importFixture = function(host, db, collection, file, callback) {
+
+  debug('spawning "mongoimport --drop --host ' + host + ' --db ' + db +
+    ' --collection ' + collection + ' --file ' + file + '"');
+
+  var mongoimport = spawn('mongoimport', ['--drop', '--host', host, '--db',
+    db, '--collection', collection, '--file', file
+  ]);
+
+  mongoimport.stdout.setEncoding('utf8');
+  mongoimport.stderr.setEncoding('utf8');
+  mongoimport.stdout.on('data', function(data) {
+    var str = data.toString()
+    var lines = str.split(/(\r?\n)/g);
+    console.log(lines.join(""));
+  });
+
+  mongoimport.stderr.on('data', function(data) {
+    var str = data.toString()
+    var lines = str.split(/(\r?\n)/g);
+    console.error(lines.join(""));
+  });
+
+  mongoimport.on('close', function(code) {
+    debug("close");
+    if (code != 0) {
+      callback(code)
+    } else {
+      callback()
+    }
+  });
+
+}
