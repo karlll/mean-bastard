@@ -1,6 +1,12 @@
 # mean-bastard
 
+![Mean Bastard] (https://raw.githubusercontent.com/karlll/mean-bastard/master/client/img/mb_logo.png)
+
+
 a small MEAN seed project
+
+
+
 
 ## Prerequisites
 
