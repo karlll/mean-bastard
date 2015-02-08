@@ -2,13 +2,13 @@
 
 a small MEAN seed project
 
-# Prerequisites
+## Prerequisites
 
 * mongodb
 * node
 * bower
 
-# Structure
+## Structure
 
     .
     ├── bin
@@ -37,39 +37,39 @@ a small MEAN seed project
         └── server
 
 
-# Build
+## Build
 
-  $ npm install
-  $ bower
+    $ npm install
+    $ bower
 
-# Configure
+## Configure
 
-* db_config.json
-* server_config.json
-* client_config.json
+* `db_config.json`
+* `server_config.json`
+* `client_config.json`
 
-# Start
+## Start
 
-## Start DB
+### Start DB
 
 Optional: you may already have started mongodb
 
-  $ bin/db
+    $ bin/db
 
-## Start Express
+### Start Express
 
-  $ bin/www
+    $ bin/www
 
-## Browse to localhost:3000
+### Browse to localhost:3000
 
-### MacOs
+#### MacOs
 
-  $ open http://127.0.0.1:3000
+    $ open http://127.0.0.1:3000
 
-# Test
+## Test
 
-## Load fixtures
+### Load fixtures
 
 See `data/fixtures/README.md`
 
-  $ bin/load_fixtures
+    $ bin/load_fixtures
