@@ -17,7 +17,6 @@ Db.prototype.init = function init(callback) {
 
 
   conn.once('open', function() {
-    //var test_schema = this.getSchema("test_schema");
     this.cfg.models.forEach(function(el, idx, arr) {
       console.log("schema : %s, model %s", el.schema, el.model);
       this.addModel(el.model, this.getSchema(el.schema));

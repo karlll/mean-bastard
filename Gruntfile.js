@@ -17,9 +17,9 @@ module.exports = function(grunt) {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint']
     },
-    compass: { // Task
-      dist: { // Target
-        options: { // Target options
+    compass: {
+      dist: {
+        options: {
           sassDir: 'client/styles',
           cssDir: 'client/styles'
         }

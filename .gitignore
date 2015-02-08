@@ -2,5 +2,4 @@
 *.map
 client/bower_components
 node_modules
-data/db
 .sass-cache
